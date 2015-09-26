@@ -1,0 +1,56 @@
+#bgd{
+	background: #ffb66c;
+}
+
+#corSpan8{
+	margin-top: 30px;
+}
+
+#login{
+	background-color: #fff;
+	width: 420px;
+	padding: 20px;
+	margin-top: 170px;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+#formTwitter{
+	width: 300px;
+}
+#imagens{
+	margin-top: 60px;
+}
+
+#campoMensagem{
+	width: 600px;
+	margin-top: 60px;
+	padding-top: 10px;
+}
+#span8Perfil{
+	margin-top: 60px;
+	background-color: white;
+	width: 880px;
+	height: 500px;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+#span4Perfil{
+	margin-top: 60px;
+	width: 440px;
+	height: 600px;
+	background-color: white;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+#span6Sobre{
+	margin-top: 60px;
+	background-color: white;
+	padding-top: 50px;
+	padding-left: 150px;
+	padding-right: 150px;
+	height: 570px;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
