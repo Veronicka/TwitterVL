@@ -6,6 +6,14 @@
 	margin-top: 30px;
 }
 
+#rodape{
+	margin: auto;
+	position:fixed;
+	width: 100%;
+	bottom:0;
+	background-color: #101010;
+}
+
 #login{
 	background-color: #fff;
 	width: 420px;
@@ -14,31 +22,51 @@
 	border-radius: 10px;
 	-webkit-border-radius: 10px;
 }
-#formTwitter{
-	width: 300px;
+
+#busca{
+	background-color: #fff;
+	padding: 20px;
+	margin-top: 170px;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
 }
+
 #imagens{
 	margin-top: 60px;
 }
 
 #campoMensagem{
-	width: 600px;
+	padding: 20px;
 	margin-top: 60px;
 	padding-top: 10px;
 }
-#span8Perfil{
+
+#mensagem{
+	padding: 20px;
+	margin-top: 20px;
+	padding-top: 10px;
+}
+
+#span6Perfil{
 	margin-top: 60px;
 	background-color: white;
-	width: 880px;
-	height: 500px;
 	border-radius: 10px;
 	-webkit-border-radius: 10px;
+	padding-bottom: 10px;
+}
+
+#span2Perfil{
+	margin-top: 60px;
+	background-color: white;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	padding-bottom: 10px;
+	
 }
 
 #span4Perfil{
 	margin-top: 60px;
-	width: 440px;
-	height: 600px;
+	padding-bottom: 30px;
 	background-color: white;
 	border-radius: 10px;
 	-webkit-border-radius: 10px;

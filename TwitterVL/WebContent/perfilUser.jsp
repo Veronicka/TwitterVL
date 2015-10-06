@@ -44,9 +44,21 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-4" align="center">
-			<div id="span4Perfil">	
-			<br />			
+			<div id="span4Perfil">
+				<br />
+				<form action="buscar" method="post" id="buscar">
+					<div class="input-group" align="center">
+						<span id="basic-addon1" class="input-group-addon">
+							<i class="fa fa-search"></i>
+						</span>
+						<input type="text" name="busca" placeholder="Buscar Usuário" aria-describedby="basic-addon1" class="form-control" />
+					</div>
+					<div align="right">
+						<button type="submit" class="btn btn-default">Buscar</button>
+					</div>
+				</form>
 				<%
+					String user = request.getParameter("use");
 					Usuario u = (Usuario) session.getAttribute("user");
 				%>
 				<%
@@ -58,7 +70,7 @@
 				if (u != null) {%>
 					<h2>Olá <%=u.getNome()%> !</h2>
 						<img src=<%=u.getFoto()%> alt="ve" class="img-circle" style="width: 200px; height: 200px;">
-						<h4><%="@"+u.getLogin()%></h4>
+						<h4><%="@"+user%></h4>
 				<%}%>
 				<br />
 				<%if(u.getLogin().equals("veve")){ %>
@@ -72,8 +84,8 @@
 				<%} %>
 			</div>
 			</div>
-			<div class="col-md-6" align="center">
-			<div id="span6Perfil">
+			<div class="col-md-8" align="center">
+			<div id="span8Perfil">
 				<form role="form" action="mensagens" method="post" id="campoMensagem">
 					<div class="input-group">
 						<span id="basic-addon1" class="input-group-addon">
@@ -100,31 +112,6 @@
 					<%} %>
 				</div>					
 			</div>
-			</div>
-			<div class="col-md-2" align="center">
-				<div id="span6Perfil">
-					<br />
-					<form action="buscar" method="post" class="form-inline">
-						<div class="input-group" align="center">
-							<span id="basic-addon1" class="input-group-addon">
-								<i class="fa fa-search"></i>
-							</span>
-							<input type="text" name="busca" placeholder="Buscar Usuário" aria-describedby="basic-addon1" class="form-control" />
-						</div>
-							<button type="submit" class="btn btn-default">Buscar</button>
-					</form>
-					<br />
-					<h3>Tópicos</h3>
-					<br/>
-					<%ArrayList<String> tags = (ArrayList<String>) getServletContext().getAttribute("tags"); 
-					if(tags != null){
-						for(String t: tags){%>
-								<h4 align="left" style="padding-left:30px;"><%=t %></h4>
-							<%}
-					}else{%>
-						<h3>Não há tópicos</h3>
-					<%}	%>
-				</div>
 			</div>
 		</div>
 	</div>

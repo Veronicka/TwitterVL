@@ -36,7 +36,6 @@ public class Verificador implements Filter {
 		
 		HttpSession session = httpRequest.getSession();
 		
-		//ServletContext context = getServletContext();
 
 		Object user = session.getAttribute("usuario");
 		
