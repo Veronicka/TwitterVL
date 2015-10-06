@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.Msg;
 import model.Usuario;
 
 
 @WebServlet("/mensagens")
 public class Mensagens extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ArrayList<String> msgs;
-	//private ArrayList<String> msgs2;
 	private ArrayList<String> tags;
+	private ArrayList<Msg> msgs;
 	private Usuario user;
 	private int cont = 0 ;
 	
 	public Mensagens() {
 		super();
-		msgs = new ArrayList<String>();
+		msgs = new ArrayList<Msg>();
 		tags = new ArrayList<String>();
 	}
 
@@ -34,35 +34,44 @@ public class Mensagens extends HttpServlet {
 		ServletContext context = getServletContext();
 		String msg = request.getParameter("mensagem");
 		
-		user = (Usuario) sessao.getAttribute("user");
-		
-		user.addMensagens(msg);
-		sessao.setAttribute("msgs", user.getMensagens());
-		
-		if(msg.contains("#")){
-			String m[] = msg.split(" ");
-			if(cont==7){
-				tags.remove(0);
+		if(msg!=null && !msg.isEmpty()){
+			
+			user = (Usuario) sessao.getAttribute("user");
+			
+			user.addMensagens(user.getFoto(), msg);
+			Msg ms = new Msg();
+			ms.setFoto(user.getFoto());
+			ms.setMsg(msg);
+			msgs.add(ms);
+			
+			//sessao.setAttribute("use", user);
+			
+			
+			if(msg.contains("#")){
+				String m[] = msg.split(" ");
+				if(cont==7){
+					tags.remove(0);
+				}
+				for(String i: m){
+					if(i.startsWith("#")){
+						System.out.println(i);
+						tags.add(i);
+						context.setAttribute("tags", tags);
+						cont++;
+					}
+				}
 			}
-			for(String i: m){
-				if(i.startsWith("#")){
-					System.out.println(i);
-					tags.add(i);
-					context.setAttribute("tags", tags);
-					cont++;
+			
+			for(Usuario u: Autenticador.listaDeUsuarios){
+				if(u.getLogin().equals("luis")){
+					user.getSeguidos().add(u);
+					for(Msg i: u.getMensagens()){
+						msgs.add(i);
+					}
 				}
 			}
 		}
-		
-		/*if(user.getLogin().equals("veve")){		
-			user.addMensagens(msg);
-			sessao.setAttribute("msgs", user.getMensagens());
-		}
-		else{
-			user.addMensagens(msg);
-			sessao.setAttribute("msgs2", user.getMensagens());
-		}
-		*/
+		sessao.setAttribute("msgs", msgs);
 		response.sendRedirect(request.getContextPath() + "/perfil.jsp");
 	}
 

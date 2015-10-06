@@ -9,11 +9,12 @@ public class Usuario {
 	private String login;
 	private String senha;
 	private String foto;
-	private ArrayList<String> mensagens;
+	private ArrayList<Msg> mensagens;
 	private ArrayList<Usuario> seguidos; 
 
 	public Usuario() {
-		setMensagens(new ArrayList<String>());
+		mensagens = new ArrayList<Msg>();
+		seguidos = new ArrayList<Usuario>();
 	}
 	
 	public String getFoto() {
@@ -46,23 +47,28 @@ public class Usuario {
 		this.senha = senha;
 	}
 	
-	public void addMensagens(String m){
-		mensagens.add(m);
-	}
-
-	public ArrayList<String> getMensagens() {
-		return mensagens;
-	}
-
-	public void setMensagens(ArrayList<String> mensagens) {
-		this.mensagens = mensagens;
-	}
 	public ArrayList<Usuario> getSeguidos() {
 		return seguidos;
 	}
 
 	public void setSeguidos(ArrayList<Usuario> seguidos) {
 		this.seguidos = seguidos;
+	}
+
+	
+	public void addMensagens(String foto, String msg){
+		Msg m = new Msg();
+		m.setFoto(foto);
+		m.setMsg(msg);
+		mensagens.add(m);
+	}
+
+	public ArrayList<Msg> getMensagens() {
+		return mensagens;
+	}
+
+	public void setMensagens(ArrayList<Msg> mensagens) {
+		this.mensagens = mensagens;
 	}
 
 }

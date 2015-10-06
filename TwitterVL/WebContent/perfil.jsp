@@ -1,3 +1,4 @@
+<%@page import="model.Msg"%>
 <%@page import="java.util.*"%>
 <%@page import="model.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -87,13 +88,14 @@
 					</div>
 				</form>
 				<div id="mensagem" >					
-					<%ArrayList<String> msg = (ArrayList<String>) session.getAttribute("msgs");
+					<%//Usuario use = (Usuario) session.getAttribute("use");
+					   ArrayList<Msg> mg = (ArrayList<Msg>) session.getAttribute("msgs");
 					%>
-					<%if(msg!=null){%>
-						<%for(String s: msg){%>
+					<%if(mg!=null){%>
+						<%for(Msg s: mg){%>
 							<div class="input-group">
-								<span id="basic-addon1" class="input-group-addon"><img src=<%=u.getFoto()%> alt="ve" class="img-rounded" style="width: 70px; height: 70px;"></span>
-								<textarea disabled="disabled" rows=4 cols=10 class="form-control"><%=s%></textarea>
+								<span id="basic-addon1" class="input-group-addon"><img src=<%=s.getFoto()%> alt="ve" class="img-rounded" style="width: 70px; height: 70px;"></span>
+								<textarea disabled="disabled" rows=4 cols=10 class="form-control"><%=s.getMsg()%></textarea>
 							</div>
 							<br />
 						<%} %>
@@ -102,16 +104,16 @@
 			</div>
 			</div>
 			<div class="col-md-2" align="center">
-				<div id="span6Perfil">
+				<div id="span2Perfil">
 					<br />
 					<form action="buscar" method="post" class="form-inline">
-						<div class="input-group" align="center">
+						<div class="input-group" align="center" id="buscar">
 							<span id="basic-addon1" class="input-group-addon">
 								<i class="fa fa-search"></i>
 							</span>
-							<input type="text" name="busca" placeholder="Buscar Usuário" aria-describedby="basic-addon1" class="form-control" />
+							<input type="text" name="busca" placeholder="Buscar Usuário" aria-describedby="basic-addon1" class="form-control"/>
 						</div>
-							<button type="submit" class="btn btn-default">Buscar</button>
+							<div align="right"><button type="submit" class="btn btn-default">Buscar</button></div>
 					</form>
 					<br />
 					<h3>Tópicos</h3>
@@ -119,7 +121,7 @@
 					<%ArrayList<String> tags = (ArrayList<String>) getServletContext().getAttribute("tags"); 
 					if(tags != null){
 						for(String t: tags){%>
-								<h4 align="left" style="padding-left:30px;"><%=t %></h4>
+								<h4 align="left"><%=t %></h4>
 							<%}
 					}else{%>
 						<h3>Não há tópicos</h3>
