@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%@page import="model.Usuario"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.*"%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -26,7 +26,7 @@
     		</div>
        	  	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       			<ul class="nav navbar-nav">
-        			<li class="active"><a href="#">Início<span class="sr-only">(current)</span></a></li>
+        			<li><a href="perfil.jsp">Início<span class="sr-only">(current)</span></a></li>
         			<li><a href="sobre.html">Sobre</a></li>
         		</ul>
         	</div>
@@ -54,6 +54,8 @@
 			    			<tr>
 			    				<td><%=u.getNome() %></td>
 			    				<td><a href="perfilUser.jsp"><%=u.getLogin() %></a></td>
+			    				<% HttpSession sessao = request.getSession();%>
+								<% sessao.setAttribute("user2", u);%>
 			    			</tr>
 			    			<%}%>
 		    			</tbody>

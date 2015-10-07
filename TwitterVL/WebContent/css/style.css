@@ -8,7 +8,7 @@
 
 #rodape{
 	margin: auto;
-	position:fixed;
+	position: relative;
 	width: 100%;
 	bottom:0;
 	background-color: #101010;
@@ -29,6 +29,15 @@
 	margin-top: 170px;
 	border-radius: 10px;
 	-webkit-border-radius: 10px;
+	margin-bottom: 162px;
+}
+#addUser{
+	background-color: #fff;
+	padding: 20px;
+	margin-top: 125px;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	margin-bottom: 59px;
 }
 
 #imagens{
@@ -52,7 +61,7 @@
 	background-color: white;
 	border-radius: 10px;
 	-webkit-border-radius: 10px;
-	padding-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 #span2Perfil{
@@ -63,6 +72,7 @@
 	border-radius: 10px;
 	-webkit-border-radius: 10px;
 	padding-bottom: 10px;
+	margin-bottom: 10px;
 	
 }
 
@@ -72,6 +82,7 @@
 	background-color: white;
 	border-radius: 10px;
 	-webkit-border-radius: 10px;
+	margin-bottom: 10px;
 }
 
 #span6Sobre{
@@ -83,4 +94,5 @@
 	height: 570px;
 	border-radius: 10px;
 	-webkit-border-radius: 10px;
+	margin-bottom: 10px;
 }

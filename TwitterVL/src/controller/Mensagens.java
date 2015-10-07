@@ -18,8 +18,8 @@ import model.Usuario;
 public class Mensagens extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<String> tags;
-	private ArrayList<Msg> msgs;
-	private Usuario user;
+	public static ArrayList<Msg> msgs;
+	public static Usuario user;
 	private int cont = 0 ;
 	
 	public Mensagens() {
@@ -42,10 +42,7 @@ public class Mensagens extends HttpServlet {
 			Msg ms = new Msg();
 			ms.setFoto(user.getFoto());
 			ms.setMsg(msg);
-			msgs.add(ms);
-			
-			//sessao.setAttribute("use", user);
-			
+			msgs.add(ms);			
 			
 			if(msg.contains("#")){
 				String m[] = msg.split(" ");
@@ -62,14 +59,17 @@ public class Mensagens extends HttpServlet {
 				}
 			}
 			
-			for(Usuario u: Autenticador.listaDeUsuarios){
-				if(u.getLogin().equals("luis")){
-					user.getSeguidos().add(u);
-					for(Msg i: u.getMensagens()){
-						msgs.add(i);
+			if(user.getSeguidos() != null && !user.getSeguidos().isEmpty()){
+				for(Usuario u: Autenticador.listaDeUsuarios){
+					for(Usuario k: user.getSeguidos()){
+						if(u.getLogin().equals(k.getLogin())){
+							for(Msg i: u.getMensagens()){
+								msgs.add(i);
+							}
+						}
 					}
 				}
-			}
+				}
 		}
 		sessao.setAttribute("msgs", msgs);
 		response.sendRedirect(request.getContextPath() + "/perfil.jsp");

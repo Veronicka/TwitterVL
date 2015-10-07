@@ -47,6 +47,7 @@ public class Autenticador extends HttpServlet {
 		veve.setSenha("123");
 		veve.setNome("Verônica");
 		veve.setFoto("img/ve.jpg");
+		veve.addMensagens("img/ve.jpg", "Olá pessoal!");
 		listaDeUsuarios.add(veve);
 		
 		Usuario luis = new Usuario();		
@@ -54,6 +55,7 @@ public class Autenticador extends HttpServlet {
 		luis.setSenha("321");
 		luis.setNome("Luis");	
 		luis.setFoto("img/luis.jpg");
+		luis.addMensagens("img/luis.jpg", "Olá galera");
 		listaDeUsuarios.add(luis);		
 				
 		for(Usuario u : listaDeUsuarios){
@@ -62,6 +64,7 @@ public class Autenticador extends HttpServlet {
 				temp.setSenha(u.getSenha());
 				temp.setFoto(u.getFoto());
 				temp.setNome(u.getNome());
+				temp.addMensagens(u.getFoto(), "");
 			}
 		}
 		if(temp.getLogin()!=null){		

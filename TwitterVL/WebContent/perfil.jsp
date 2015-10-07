@@ -39,6 +39,13 @@
         			<li class="active"><a href="#">Início<span class="sr-only">(current)</span></a></li>
         			<li><a href="sobre.html">Sobre</a></li>
         		</ul>
+        		<ul class="nav navbar-nav navbar-right">
+	        		<li><form action="logout" method="post">
+								<a type="submit" href="index.html"><font color="orange">Sair</font></a>
+								<% Usuario none = (Usuario) session.getAttribute(null);%>
+						</form>
+	        		</li>
+        		</ul>
         	</div>
   		</div>
 	</nav>

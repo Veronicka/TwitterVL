@@ -1,3 +1,6 @@
+<%@page import="controller.Mensagens"%>
+<%@page import="controller.Autenticador"%>
+<%@page import="model.Msg"%>
 <%@page import="java.util.*"%>
 <%@page import="model.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -35,7 +38,7 @@
     		</div>
        	  	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       			<ul class="nav navbar-nav">
-        			<li class="active"><a href="#">Início<span class="sr-only">(current)</span></a></li>
+        			<li><a href="perfil.jsp">Início<span class="sr-only">(current)</span></a></li>
         			<li><a href="sobre.html">Sobre</a></li>
         		</ul>
         	</div>
@@ -44,22 +47,11 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-4" align="center">
-			<div id="span4Perfil">
-				<br />
-				<form action="buscar" method="post" id="buscar">
-					<div class="input-group" align="center">
-						<span id="basic-addon1" class="input-group-addon">
-							<i class="fa fa-search"></i>
-						</span>
-						<input type="text" name="busca" placeholder="Buscar Usuário" aria-describedby="basic-addon1" class="form-control" />
-					</div>
-					<div align="right">
-						<button type="submit" class="btn btn-default">Buscar</button>
-					</div>
-				</form>
+			<div id="span4Perfil">	
+			<br />			
 				<%
-					String user = request.getParameter("use");
-					Usuario u = (Usuario) session.getAttribute("user");
+					Usuario u = (Usuario) session.getAttribute("user2");
+		    		String seguindo = (String) session.getAttribute("seguindo");
 				%>
 				<%
 					if(u == null){
@@ -70,7 +62,7 @@
 				if (u != null) {%>
 					<h2>Olá <%=u.getNome()%> !</h2>
 						<img src=<%=u.getFoto()%> alt="ve" class="img-circle" style="width: 200px; height: 200px;">
-						<h4><%="@"+user%></h4>
+						<h4><%="@"+u.getLogin()%></h4>
 				<%}%>
 				<br />
 				<%if(u.getLogin().equals("veve")){ %>
@@ -84,34 +76,53 @@
 				<%} %>
 			</div>
 			</div>
-			<div class="col-md-8" align="center">
-			<div id="span8Perfil">
-				<form role="form" action="mensagens" method="post" id="campoMensagem">
-					<div class="input-group">
-						<span id="basic-addon1" class="input-group-addon">
-							<img src=<%=u.getFoto()%> alt="ve" class="img-rounded" style="width: 70px; height: 70px;">
-						</span>
-						<textarea rows=4 cols=10 onKeyPress="return taLimit(this)" onKeyUp="return taCount(this,'myCounter')" name="mensagem" class="form-control" placeholder="Digite sua mensagem aqui"></textarea>
-					</div>
-					<div align="right">
-						<font color="red" id=myCounter>300</font>
-						<button type="submit" class="btn btn-default" >Postar</button>
-					</div>
-				</form>
-				<div id="mensagem" >					
-					<%ArrayList<String> msg = (ArrayList<String>) session.getAttribute("msgs");
-					%>
-					<%if(msg!=null){%>
-						<%for(String s: msg){%>
+			<div class="col-md-6" align="center">
+			<div id="span6Perfil">
+				
+				<div id="mensagem" >
+				<div align="right">
+					<form action="seguidores" method="post">
+						<input type="text" name="seguir" value=<%=u.getLogin()%> hidden="hidden"/>
+						<button type="submit" class="btn btn-default btn-large"><%if(seguindo!=null){%><%=seguindo %><%}else{%>Seguir<%} %></button>
+					</form>
+				</div>
+				<br />		
+					<%if(u.getMensagens() != null){%>
+						<%for(Msg s: u.getMensagens()){%>
 							<div class="input-group">
-								<span id="basic-addon1" class="input-group-addon"><img src=<%=u.getFoto()%> alt="ve" class="img-rounded" style="width: 70px; height: 70px;"></span>
-								<textarea disabled="disabled" rows=4 cols=10 class="form-control"><%=s%></textarea>
+								<span id="basic-addon1" class="input-group-addon"><img src=<%=s.getFoto()%> alt="ve" class="img-rounded" style="width: 70px; height: 70px;"></span>
+								<textarea disabled="disabled" rows=4 cols=10 class="form-control"><%=s.getMsg()%></textarea>
 							</div>
 							<br />
 						<%} %>
 					<%} %>
 				</div>					
 			</div>
+			</div>
+			<div class="col-md-2" align="center">
+				<div id="span2Perfil">
+					<br />
+					<form action="buscar" method="post" class="form-inline">
+						<div class="input-group" align="center" id="buscar">
+							<span id="basic-addon1" class="input-group-addon">
+								<i class="fa fa-search"></i>
+							</span>
+							<input type="text" name="busca" placeholder="Buscar Usuário" aria-describedby="basic-addon1" class="form-control"/>
+						</div>
+							<div align="right"><button type="submit" class="btn btn-default">Buscar</button></div>
+					</form>
+					<br />
+					<h3>Tópicos</h3>
+					<br/>
+					<%ArrayList<String> tags = (ArrayList<String>) getServletContext().getAttribute("tags"); 
+					if(tags != null){
+						for(String t: tags){%>
+								<h4 align="left"><%=t %></h4>
+							<%}
+					}else{%>
+						<h3>Não há tópicos</h3>
+					<%}	%>
+				</div>
 			</div>
 		</div>
 	</div>
